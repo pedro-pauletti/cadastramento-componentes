@@ -119,3 +119,37 @@ $(function(){
         return false;
     });
   });
+
+
+
+    /* Buscar dados selecionando o Campo
+    memorias.where("Nome", "!=", "")
+    .get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            
+            console.log(doc.data().Nome);
+
+        });
+    })
+    .catch((error) => {
+        console.log("Error getting documents: ", error);
+    });
+*/
+
+ 
+
+function mostraBancoDados(collection, tableid) {	
+    var memorias = db.collection(collection)
+    var html = ""
+
+    memorias.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            html += "<tr><td>" + doc.data().Nome + "</td></tr>"
+            
+        });
+        var dataMemorias = document.getElementById(tableid)
+        dataMemorias.innerHTML = html
+    });
+}

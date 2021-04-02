@@ -38,7 +38,22 @@
     <input type = "text" placeholder = "PortasUSBTypeC" id="PortasUSBTypeC"><br>
     <input type = "text" placeholder = "Cor" id="Cor"><br>
     <input type = "text" placeholder = "URL da Imagem" id="urlImagem"><br>
-    <button onclick="addPlacaMae()">Adicionar</button>
+    <button onclick="addPlacaMae()">Adicionar</button><br><br>
+
+    
+
+    <div id="BancoDeDados">
+        <button id="mostraDados" onclick="mostraBancoDados('Placas-Mães','dataPlacasMaes')"> Atualizar Banco de Dados</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Placas-Mães Cadastradas no Banco de Dados</th>
+                </th>
+            </tr>
+        </thead>
+        <tbody id = dataPlacasMaes></tbody>
+        </table>
+        </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
