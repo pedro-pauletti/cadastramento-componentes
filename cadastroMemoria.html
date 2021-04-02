@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Comparador de Componentes</title>
+</head>
+<body>
+    <h1>Comparador de Componentes</h1>
+
+    <h2>Adicionar ao Banco de Dados</h2>
+    <label for="Componentes">Selecione um Componente:</label>
+    <select name="Componentes" id="Componentes">
+        <option value="cadastroMemoria.html">Memória</option>
+        <option value="cadastroPlacaMae.html">Placa-Mãe</option>
+    </select><br><br>
+
+    <input type = "text" placeholder = "Nome" id="Nome"><br>
+    <input type = "text" placeholder = "Fabricante" id="Fabricante"><br>
+    <input type = "text" placeholder = "Modelo" id="Modelo"><br>
+    <input type = "text" placeholder = "PN" id="PN"><br>
+    <input type = "text" placeholder = "Tipo" id="Tipo"><br>
+    <input type = "text" placeholder = "Velocidade" id="Velocidade"><br>
+    <input type = "text" placeholder = "Capacidade" id="Capacidade"><br>
+    <input type = "text" placeholder = "Módulo" id="Módulo"><br>
+    <input type = "text" placeholder = "Cas Latency" id="CasLatency"><br>
+    <input type = "text" placeholder = "Timing" id="Timing"><br>
+    <input type = "text" placeholder = "Voltagem" id="Voltagem"><br>
+    <input type = "text" placeholder = "Dissipador" id="Dissipador"><br>
+    <input type = "text" placeholder = "Ecc" id="Ecc"><br>
+    <input type = "text" placeholder = "Registrada" id="Registrada"><br>
+    <input type = "text" placeholder = "Cor" id="Cor"><br>
+    <input type = "text" placeholder = "URL da Imagem" id="urlImagem"><br>
+    <button onclick="addMemoria()">Adicionar</button>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
+    <script src="firebase.js"></script>
+    <script src="app.js"></script>
+    
+  
+
+</body>
+</html>
