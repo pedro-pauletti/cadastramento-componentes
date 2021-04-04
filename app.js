@@ -153,3 +153,69 @@ function mostraBancoDados(collection, tableid) {
         dataMemorias.innerHTML = html
     });
 }
+
+
+function compatibilidade(collection1, collection2, nomeComponente1, nomeComponente2){
+
+    var componente1 = db.collection(collection1)
+    var componente2 = db.collection(collection2)
+
+    //compatibilidade entre MEMÓRIA E PLACA MÃE
+    if(collection1 == "Memórias" && collection2 == "Placas-Mães"){
+        var info1, info2;
+        
+        componente1.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                if (doc.data().Nome == nomeComponente1)
+                    info1 = doc.data().Velocidade
+            }); 
+
+
+            componente2.get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    if (doc.data().Nome == nomeComponente2)
+                        info2 = doc.data().VelocidadesMemória
+                }); 
+                //Teste de compatibilidade aqui
+                console.log("Velocidade da Memória (Memória RAM): " + info1)
+                console.log("Velocidades da Memória (Placa-Mãe): " + info2)
+
+                info1= info1.split("-")
+                info2 = info2.split("-")
+                var velocidades = []
+                velocidades.push(info2[0])
+                velocidades.push(info2[1].split(" / "))
+
+                if(info1[0] == info2[0]){
+                    console.log("Componente 1:" + info1[0] + "\nComponente 2: " + info2[0] + "\nDDR's Compatíveis");
+                    if(info1[1] <= velocidades[1][velocidades[1].length - 1] && info1[1] >= velocidades[1][0]){
+                        console.log("Velocidade Memória: " +info1[1])
+                        console.log("Velocidades Placa-Mãe: " +velocidades[1][0] +"-"+velocidades[1][velocidades[1].length - 1])
+                        console.log("Velocidade dentro da Variação da Placa-Mãe")
+                    }
+                    else
+                        console.log("Velocidade da Memória incompatível com a Placa-Mãe")
+
+                } else    
+                    console.log("Componente 1:" + info1[0] + "\nComponente 2: " + info2[0] + "\nDDR's Incompatíveis");
+
+                
+                /* Nao valido para velocidades iguais ao cadastro
+                for(var i = 0; i < velocidades[1].length; i++){
+                    if(info1[1].includes(velocidades[1][i]))
+                        console.log("Velocidade dentro da Variação da Placa-Mãe")
+                }
+                */
+               
+            });
+
+
+        });
+
+    }
+
+
+}
+
+//compatibilidade("Memórias", "Placas-Mães", "Corsair Vengeance Pro (RGB)", "Gigabyte B450M DS3H")
+compatibilidade("Memórias", "Placas-Mães", "Kingston ValueRAM (Verde)", "Gigabyte B460M GAMING HD")

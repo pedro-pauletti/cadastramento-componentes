@@ -1,3 +1,5 @@
+
+
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
@@ -11,3 +13,25 @@ table, th, td {
 	margin-left:-110px;
 	margin-top:-40px;
 }
+
+
+li {
+  float: left;
+  border-right:0.5px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+
+li a:hover:not(.active) {
+  background-color: rgba(196, 196, 196, 0.062);
+}
+
+
+body {
+	background-color: rgb(255, 255, 255);
+	font-family: sans-serif;
+}
+
