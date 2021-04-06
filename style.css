@@ -7,7 +7,7 @@ table, th, td {
 
 
 #BancoDeDados{
-    position:absolute;
+  position:absolute;
 	left:60%;
 	top:25%;
 	margin-left:-110px;
@@ -35,3 +35,95 @@ body {
 	font-family: sans-serif;
 }
 
+.sidenav{
+  position: absolute;
+  width: 400px;
+  height: 100%;
+  right: 0px;
+  top:5%;
+  background-color: #1E2027;
+}
+
+#Componente1{
+  position: absolute;
+  color: rgb(255, 255, 255);
+  right: 26%;
+  top: 3%;
+}
+
+#imgComp1{
+  position: absolute;
+  opacity: 0.3;
+  right: 23%;
+  top: 9%;
+  width: 204px;
+  height: 204px;
+}
+
+
+#Componente2{
+  position: absolute;
+  color: rgb(255, 255, 255);
+  right: 26%;
+  top: 45%;
+}
+
+#imgComp2{
+  position: absolute;
+  opacity: 0.3;
+  right: 23%;
+  top: 51%;
+  width: 204px;
+  height: 204px;
+}
+
+#BotaoComp{
+  position: absolute;
+  right: 23%;
+  top: 88%;
+}
+
+thead th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  top: 0;
+  background : #1E2027;
+}
+
+
+.table-responsive{
+  overflow-y: scroll;
+  height: 450px;
+}
+
+
+#remove1{
+  position: absolute;
+  right: 18%;
+  top: 7%;
+}
+
+
+#remove2{
+  position: absolute;
+  right: 18%;
+  top: 49%;
+}
+
+#nomeComp1{
+  position: absolute;
+  opacity: 0.5;
+  right: 18%;
+  top: 37%;
+  color: rgb(255, 255, 255);
+  text-align: center;
+}
+
+#nomeComp2{
+  position: absolute;
+  opacity: 0.5;
+  right: 18%;
+  top: 79%;
+  color: rgb(255, 255, 255);
+  text-align: center;
+}

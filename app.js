@@ -218,4 +218,97 @@ function compatibilidade(collection1, collection2, nomeComponente1, nomeComponen
 }
 
 //compatibilidade("Memórias", "Placas-Mães", "Corsair Vengeance Pro (RGB)", "Gigabyte B450M DS3H")
-compatibilidade("Memórias", "Placas-Mães", "Kingston ValueRAM (Verde)", "Gigabyte B460M GAMING HD")
+//compatibilidade("Memórias", "Placas-Mães", "Kingston ValueRAM (Verde)", "Gigabyte B460M GAMING HD")
+
+
+
+function mostraOpcoes(collection, tableid) {	
+
+    var memorias = db.collection(collection)
+    var html = ""
+
+    if(collection == "Memórias"){
+       html = "<thead><th  scope= 'col' >Memória</th> <th scope='col'>Velocidade</th> <th scope='col'>Tipo</th> <th scope='col'>Módulos</th> <th scope='col'>Capacidade</th> <th scope='col'></th></thead>"
+        memorias.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                html += "<tbody><tr><td style='width: 45%;'><img src =" + doc.data().urlImagem + " width=15%>  " + doc.data().Nome + "</td>"
+                html += "<td>" + doc.data().Velocidade + "</td>"
+                html += "<td>" + doc.data().Tipo + "</td>"
+                html += "<td>" + doc.data().Módulo + "</td>"
+                html += "<td>" + doc.data().Capacidade + "</td>"
+                html += "<td><button onclick = 'addComponente(\""+doc.data().Nome+"\", \""+doc.data().urlImagem+"\")' class='btn btn-primary'>ADD</button></td></tr></tbody>"
+            });
+            var dataMemorias = document.getElementById(tableid)
+            dataMemorias.innerHTML = html
+            
+        });
+    }
+    else if(collection == "Placas-Mães"){
+            html = "<thead><th  scope= 'col'>Placa-Mãe</th> <th scope='col'>Socket CPU</th> <th scope='col'>Formato</th> <th scope='col'>Slots Memória</th> <th scope='col'>Memória Máx.</th> <th scope='col'></th></thead>"
+            memorias.get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    html += "<tbody><tr><td style='width: 35%;'><img src =" + doc.data().urlImagem + " width=15%>  " + doc.data().Nome + "</td>"
+                    html += "<td>" + doc.data().SocketProcessador + "</td>"
+                    html += "<td>" + doc.data().Formato + "</td>"
+                    html += "<td>" + doc.data().SlotsMemória + "</td>"
+                    html += "<td>" + doc.data().MemóriaMáxima + "</td>"
+                    html += "<td><button onclick = 'addComponente(\""+doc.data().Nome+"\", \""+doc.data().urlImagem+"\")' class='btn btn-primary'>ADD</button></td></tr></tbody>"
+                });
+                var dataMemorias = document.getElementById(tableid)
+                dataMemorias.innerHTML = html
+            });
+        }
+}
+
+
+$("#SelectOpcoes").change(function () {
+    if ($(this).val() == "Memórias") {
+      mostraOpcoes("Memórias", "opcoes")
+    }
+    else if($(this).val() == "Placas-Mães"){
+        	mostraOpcoes("Placas-Mães", "opcoes")
+    }
+  });
+
+
+
+
+
+function addComponente(nomeComponente, urlImagem){
+
+    if(document.getElementById("imgComp1").getAttribute('value') == 0){
+        document.getElementById("nomeComp1").innerHTML = nomeComponente
+        document.getElementById("imgComp1").src = urlImagem; 
+        document.getElementById("imgComp1").style.opacity = 1;
+        document.getElementById("imgComp1").setAttribute('value', 1)
+       document.getElementById("addComp1").innerHTML = "<img id = 'remove1' src='assets\\remove.png' onclick = 'removeComponente(this.id)'>"
+       
+        
+    }else if(document.getElementById("imgComp2").getAttribute('value') == 0){
+        document.getElementById("nomeComp2").innerHTML = nomeComponente
+        document.getElementById("imgComp2").src = urlImagem; 
+        document.getElementById("imgComp2").style.opacity = 1;
+        document.getElementById("imgComp2").setAttribute('value', 1)
+        document.getElementById("addComp2").innerHTML = "<img id = 'remove2' src='assets\\remove.png' onclick = 'removeComponente(this.id)'>"
+        
+    }
+  
+}
+
+function removeComponente(id){
+  
+    if(id == 'remove1'){
+        document.getElementById("nomeComp1").innerHTML = ""
+        document.getElementById("imgComp1").src = document.getElementById("imgComp1").getAttribute('srcOriginal')
+        document.getElementById("imgComp1").style.opacity = 0.3
+        document.getElementById("imgComp1").setAttribute('value', 0)
+        document.getElementById("remove1").remove()
+    }else{    
+        document.getElementById("nomeComp2").innerHTML = ""
+        document.getElementById("imgComp2").src = document.getElementById("imgComp2").getAttribute('srcOriginal')
+        document.getElementById("imgComp2").style.opacity = 0.3
+        document.getElementById("imgComp2").setAttribute('value', 0)
+        document.getElementById("remove2").remove()
+    }
+
+}
