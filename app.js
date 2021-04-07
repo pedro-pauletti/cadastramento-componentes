@@ -292,6 +292,9 @@ function addComponente(nomeComponente, urlImagem){
         document.getElementById("addComp2").innerHTML = "<img id = 'remove2' src='assets\\remove.png' onclick = 'removeComponente(this.id)'>"
         
     }
+
+    if(document.getElementById("imgComp1").getAttribute('value') == 1 && document.getElementById("imgComp2").getAttribute('value') == 1)
+        document.getElementById("verificar").setAttribute('class', 'btn btn-primary')
   
 }
 
@@ -312,3 +315,4 @@ function removeComponente(id){
     }
 
 }
+
