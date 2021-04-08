@@ -1,6 +1,6 @@
 
 table, th, td {
-    border: 1px solid black;
+    border: 0px solid rgb(36,36,44);
     border-collapse: collapse;
   }
 
@@ -31,10 +31,9 @@ li a:hover:not(.active) {
 
 
 body {
-
+  
 	font-family: sans-serif;
 }
-
 
 
 .sidenav{
@@ -43,7 +42,7 @@ body {
   height: 100%;
   right: 0px;
   top:7%;
-  background-color: #1E2027;
+  background-color: rgb(36,36,44);
 }
 
 #Componente1{
@@ -89,13 +88,13 @@ thead th {
   position: -webkit-sticky; /* for Safari */
   position: sticky;
   top: 0;
-  background : #1E2027;
+  background : rgb(44,44,52);
 }
 
 
 .table-responsive{
   overflow-y: scroll;
-  height: 450px;
+  height: 500px;
 }
 
 
