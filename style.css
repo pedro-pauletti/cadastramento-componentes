@@ -54,6 +54,7 @@ body {
 
 #imgComp1{
   position: absolute;
+  border-radius: 10px;
   opacity: 0.3;
   right: 23%;
   top: 9%;
@@ -71,6 +72,7 @@ body {
 
 #imgComp2{
   position: absolute;
+  border-radius: 10px;
   opacity: 0.3;
   right: 23%;
   top: 51%;
@@ -119,7 +121,7 @@ thead th {
   color: rgb(255, 255, 255);
   text-align: center;
   width: 210px; 
-  word-break: break-all;
+  word-break: break-word;
 }
 
 #nomeComp2{
@@ -130,18 +132,11 @@ thead th {
   color: rgb(255, 255, 255);
   text-align: center;
   width: 210px; 
-  word-break: break-all;
+  word-break: break-word;
 }
 
 
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
-  text-align: center;
-}
+
 
 @media (max-width: 1350px) {
 .sidenav{
@@ -155,6 +150,7 @@ thead th {
 }
  
 
+
 #tabela{
   position: absolute;
   width: 100%;
@@ -166,7 +162,7 @@ thead th {
   position: -webkit-sticky; /* for Safari */
   position: sticky;
   top: 0;
-  background : #1E2027;
+  background : rgb(44,44,52);
 }
 
 
@@ -192,6 +188,7 @@ thead th {
 
 #imgComp1{
   position: absolute;
+  border-radius: 10px;
   opacity: 0.3;
   right: 65%;
   top: 8%;
@@ -202,6 +199,7 @@ thead th {
 
 #imgComp2{
   position: absolute;
+  border-radius: 10px;
   opacity: 0.3;
   right: 10%;
   top: 8%;
@@ -255,7 +253,7 @@ thead th {
 
 
 table, th, td {
-  border: 1px solid black;
+  border: 0px solid rgb(36,36,44);
   border-collapse: collapse;
   width: 100%;
 }

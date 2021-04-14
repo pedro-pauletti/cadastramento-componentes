@@ -119,25 +119,6 @@ $(function(){
         return false;
     });
   });
-
-
-
-    /* Buscar dados selecionando o Campo
-    memorias.where("Nome", "!=", "")
-    .get()
-    .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            
-            console.log(doc.data().Nome);
-
-        });
-    })
-    .catch((error) => {
-        console.log("Error getting documents: ", error);
-    });
-*/
-
  
 
 function mostraBancoDados(collection, tableid) {	
@@ -155,19 +136,40 @@ function mostraBancoDados(collection, tableid) {
 }
 
 
-function compatibilidade(collection1, collection2, nomeComponente1, nomeComponente2){
+function compatibilidade(){
+    
+    var collection1 = document.getElementById("imgComp1").getAttribute('collection')
+    var collection2 = document.getElementById("imgComp2").getAttribute('collection')
+    var nomeComponente1 
+    var nomeComponente2 
+    var componente1 
+    var componente2 
 
-    var componente1 = db.collection(collection1)
-    var componente2 = db.collection(collection2)
 
     //compatibilidade entre MEMÓRIA E PLACA MÃE
-    if(collection1 == "Memórias" && collection2 == "Placas-Mães"){
+    if((collection1 == "Memórias" && collection2 == "Placas-Mães") || (collection1 == "Placas-Mães" && collection2 == "Memórias")){
         var info1, info2;
         
+        if(collection1 == "Memórias"){
+            componente1 = db.collection(collection1)
+            componente2 = db.collection(collection2)
+            nomeComponente1 = document.getElementById("nomeComp1").value
+            nomeComponente2 = document.getElementById("nomeComp2").value
+        }
+        else{
+            componente1 = db.collection(collection2)
+            componente2 = db.collection(collection1)
+            nomeComponente1 = document.getElementById("nomeComp2").value
+            nomeComponente2 = document.getElementById("nomeComp1").value
+        }
+
+
         componente1.get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                if (doc.data().Nome == nomeComponente1)
+                if (doc.data().Nome == nomeComponente1){
                     info1 = doc.data().Velocidade
+                    
+                }
             }); 
 
 
@@ -236,7 +238,7 @@ function mostraOpcoes(collection, tableid) {
                 html += "<td>" + doc.data().Tipo + "</td>"
                 html += "<td>" + doc.data().Módulo + "</td>"
                 html += "<td>" + doc.data().Capacidade + "</td>"
-                html += "<td><button onclick = 'addComponente(\""+doc.data().Nome+"\", \""+doc.data().urlImagem+"\")' class='btn btn-primary'>ADD</button></td></tr></tbody>"
+                html += "<td><button onclick = 'addComponente(\""+doc.data().Nome+"\", \""+doc.data().urlImagem+"\", \""+collection+"\")' class='btn btn-primary'>ADD</button></td></tr></tbody>"
             });
             var dataMemorias = document.getElementById(tableid)
             dataMemorias.innerHTML = html
@@ -252,13 +254,14 @@ function mostraOpcoes(collection, tableid) {
                     html += "<td>" + doc.data().Formato + "</td>"
                     html += "<td>" + doc.data().SlotsMemória + "</td>"
                     html += "<td>" + doc.data().MemóriaMáxima + "</td>"
-                    html += "<td><button onclick = 'addComponente(\""+doc.data().Nome+"\", \""+doc.data().urlImagem+"\")' class='btn btn-primary'>ADD</button></td></tr></tbody>"
+                    html += "<td><button onclick = 'addComponente(\""+doc.data().Nome+"\", \""+doc.data().urlImagem+"\", \""+collection+"\")' class='btn btn-primary'>ADD</button></td></tr></tbody>"
                 });
                 var dataMemorias = document.getElementById(tableid)
                 dataMemorias.innerHTML = html
             });
         }
 }
+
 
 
 $("#SelectOpcoes").change(function () {
@@ -272,47 +275,53 @@ $("#SelectOpcoes").change(function () {
 
 
 
-
-
-function addComponente(nomeComponente, urlImagem){
+function addComponente(nomeComponente, urlImagem, collection){
 
     if(document.getElementById("imgComp1").getAttribute('value') == 0){
         document.getElementById("nomeComp1").innerHTML = nomeComponente
-        document.getElementById("imgComp1").src = urlImagem; 
-        document.getElementById("imgComp1").style.opacity = 1;
+        document.getElementById("nomeComp1").value = nomeComponente
+        document.getElementById("imgComp1").src = urlImagem
+        document.getElementById("imgComp1").style.opacity = 1
+        document.getElementById("imgComp1").setAttribute('collection', collection)
         document.getElementById("imgComp1").setAttribute('value', 1)
        document.getElementById("addComp1").innerHTML = "<img id = 'remove1' src='assets\\remove.png' onclick = 'removeComponente(this.id)'>"
        
         
     }else if(document.getElementById("imgComp2").getAttribute('value') == 0){
         document.getElementById("nomeComp2").innerHTML = nomeComponente
-        document.getElementById("imgComp2").src = urlImagem; 
-        document.getElementById("imgComp2").style.opacity = 1;
+        document.getElementById("nomeComp2").value = nomeComponente
+        document.getElementById("imgComp2").src = urlImagem;
+        document.getElementById("imgComp2").style.opacity = 1
+        document.getElementById("imgComp2").setAttribute('collection', collection)
         document.getElementById("imgComp2").setAttribute('value', 1)
         document.getElementById("addComp2").innerHTML = "<img id = 'remove2' src='assets\\remove.png' onclick = 'removeComponente(this.id)'>"
         
     }
 
-    if(document.getElementById("imgComp1").getAttribute('value') == 1 && document.getElementById("imgComp2").getAttribute('value') == 1)
+    if((document.getElementById("imgComp1").getAttribute('value') == 1 && document.getElementById("imgComp2").getAttribute('value') == 1) && (document.getElementById("imgComp1").getAttribute('collection') != document.getElementById("imgComp2").getAttribute('collection')))
         document.getElementById("verificar").setAttribute('class', 'btn btn-primary')
-  
+    else
+        document.getElementById("verificar").setAttribute('class', 'btn btn-primary disabled')
 }
 
 function removeComponente(id){
   
     if(id == 'remove1'){
         document.getElementById("nomeComp1").innerHTML = ""
+        document.getElementById("nomeComp1").value = ""
         document.getElementById("imgComp1").src = document.getElementById("imgComp1").getAttribute('srcOriginal')
         document.getElementById("imgComp1").style.opacity = 0.3
         document.getElementById("imgComp1").setAttribute('value', 0)
         document.getElementById("remove1").remove()
     }else{    
         document.getElementById("nomeComp2").innerHTML = ""
+        document.getElementById("nomeComp2").value = ""
         document.getElementById("imgComp2").src = document.getElementById("imgComp2").getAttribute('srcOriginal')
         document.getElementById("imgComp2").style.opacity = 0.3
         document.getElementById("imgComp2").setAttribute('value', 0)
         document.getElementById("remove2").remove()
     }
 
+    document.getElementById("verificar").setAttribute('class', 'btn btn-primary disabled')
 }
 
